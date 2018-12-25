@@ -20,6 +20,10 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<link rel="stylesheet" href="./OpenLayers/ol.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="./OpenLayers/ol.js"></script>
   </head>
 
   <body>
@@ -34,15 +38,67 @@
       <div class="card">
         <div class="card-body">
           <div class="row">
-            <div class="col">one</div>
-            <div class="col">two</div>
-            <div class="col">three</div>
+            <div class="col">
+				<div class="container">          
+				  <table class="table">
+					<tbody> 
+					  <tr class="table-primary">
+						<td>GPS卫星颗数:</td>
+						<td>00颗</td>
+					  </tr>
+					  <tr class="table-success">
+						<td>速度：</td>
+						<td>00.0km/h</td>
+					  </tr>
+					  <tr class="table-success">
+						<td>当前位置</td>
+						<td>22.1234567&nbsp&nbsp114.1234567&nbsp&nbsp1000.00m</td>
+					  </tr>
+					</tbody>
+				  </table>
+				</div>
+			</div>
+            <div class="col">
+				<div class="container">          
+				  <table class="table">
+					<tbody> 
+					  <tr class="table-primary">
+						<td>温度:</td>
+						<td>00℃</td>
+					  </tr>
+					  <tr class="table-success">
+						<td>湿度：</td>
+						<td>00% RH</td>
+					  </tr>
+					  <tr class="table-success">
+						<td>空气质量：</td>
+						<td>00.0ppm   空气良好</td>
+					  </tr>
+					</tbody>
+				  </table>
+				</div>
+			</div>
           </div>
         </div>
       </div>
 
       <div class="container">
-        地图显示位置
+         <h2>My Map</h2>
+		<div id="map" class="map" style="{height: 400px; width: 100%;}"></div>
+		<script type="text/javascript">
+		  var map = new ol.Map({
+			target: 'map',
+			layers: [
+			  new ol.layer.Tile({
+				source: new ol.source.OSM()
+			  })
+			],
+			view: new ol.View({
+			  center: ol.proj.fromLonLat([37.41, 8.82]),
+			  zoom: 4
+			})
+		  });
+		</script>
       </div>
 
     <div>
