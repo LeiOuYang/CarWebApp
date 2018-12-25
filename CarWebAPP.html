@@ -93,30 +93,43 @@
       <div class="container">
         <div class="row">
           <div class="col">
-            <div class="font-weight-bold">当前位置 <p>current position</p></div>
+            <div class="font-weight-bold">当前位置 <p id="current_pos">current position</p></div>
           </div>
           <div class="col">
-            <div class="font-weight-bold">车辆位置 <p>car position</p></div>
+            <div class="font-weight-bold">车辆位置 <p id="car_pos">car position</p></div>
           </div>
         </div>
-		<div id="map" class="map" style="{height: 400px; width: 100%;}"></div>
-		<script type="text/javascript">
-		  var map = new ol.Map({
-			target: 'map',
-			layers: [
-			  new ol.layer.Tile({
-				source: new ol.source.OSM()
-			  })
-			],
-			view: new ol.View({
-			  center: ol.proj.fromLonLat([37.41, 8.82]),
-			  zoom: 4
-			})
-		  });
-		</script>
+		  <div id="map" class="map" style="{height: 400px; width: 100%;}"></div>
+		  <script type="text/javascript">
+        var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+          source: new ol.source.OSM()
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([37.41, 8.82]),
+          zoom: 4
+        })
+      });
+		    </script>
       </div>
-
     <div>
+
+    <script>
+
+    function getLocation(){
+      if(navigator.geolocation){ //判断是否有这个对象
+        navigator.geolocation.getCurrentPosition(function(pos){
+          return ("经度："+pos.coords.longitude+ "纬度："+pos.coords.latitude + "高度："+pos.coords.altitude);
+        })
+      }else{ return ("当前系统不支持GPS API"); } }
+
+      $(document).ready(function(){
+        
+      });
+    </script>
 
   </body>
 
