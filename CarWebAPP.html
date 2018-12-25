@@ -20,7 +20,7 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
+
 	<link rel="stylesheet" href="./OpenLayers/ol.css">
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="./OpenLayers/ol.js"></script>
@@ -32,17 +32,17 @@
 
       <!--标题显示栏  -->
       <div class="card">
-          <div class="card-body"><h1 class="text-success"> <br/> <p class="text-center"> 车载监视器 </p> </h1></div>
+          <div class="card-body"><h3 class="text-success"> <br/> <p class="font-weight-bold"> <p class="text-center">车载监视器 </p></p> </h3></div>
       </div>
 
       <div class="card">
         <div class="card-body">
           <div class="row">
             <div class="col">
-				<div class="container">          
+				<div class="container">
 				  <table class="table">
-					<tbody> 
-					  <tr class="table-primary">
+					<tbody>
+					  <tr class="table-danger">
 						<td>GPS卫星颗数:</td>
 						<td>00颗</td>
 					  </tr>
@@ -50,19 +50,23 @@
 						<td>速度：</td>
 						<td>00.0km/h</td>
 					  </tr>
-					  <tr class="table-success">
-						<td>当前位置</td>
-						<td>22.1234567&nbsp&nbsp114.1234567&nbsp&nbsp1000.00m</td>
+					  <tr class="table-info">
+						<td>当前位置:</td>
+						<td>
+              <p>22.1234567</p>
+              <p>114.1234567</p>
+              <p>1000.00m </p>
+            </td>
 					  </tr>
 					</tbody>
 				  </table>
 				</div>
 			</div>
             <div class="col">
-				<div class="container">          
+				<div class="container">
 				  <table class="table">
-					<tbody> 
-					  <tr class="table-primary">
+					<tbody>
+					  <tr class="table-danger">
 						<td>温度:</td>
 						<td>00℃</td>
 					  </tr>
@@ -70,9 +74,13 @@
 						<td>湿度：</td>
 						<td>00% RH</td>
 					  </tr>
-					  <tr class="table-success">
+					  <tr class="table-info">
 						<td>空气质量：</td>
-						<td>00.0ppm   空气良好</td>
+						<td>
+              <p>00.0ppm </p>
+              <p> 空气良好 </p>
+              <p> -------- </p>
+            </td>
 					  </tr>
 					</tbody>
 				  </table>
@@ -83,7 +91,14 @@
       </div>
 
       <div class="container">
-         <h2>My Map</h2>
+        <div class="row">
+          <div class="col">
+            <div class="font-weight-bold">当前位置 <p>current position</p></div>
+          </div>
+          <div class="col">
+            <div class="font-weight-bold">车辆位置 <p>car position</p></div>
+          </div>
+        </div>
 		<div id="map" class="map" style="{height: 400px; width: 100%;}"></div>
 		<script type="text/javascript">
 		  var map = new ol.Map({
