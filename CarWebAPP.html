@@ -19,117 +19,133 @@
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
+    <style>
+        body,#card1,#card2{
+
+          background-color: #003333
+        }
+        #GaoDeMap {
+          width: 99%;
+          height: 75%;
+        }
+    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<link rel="stylesheet" href="./OpenLayers/ol.css">
-    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="./OpenLayers/ol.js"></script>
   </head>
 
   <body>
 
-    <div class="container ">
+    <div class="container-fluid">
 
       <!--标题显示栏  -->
-      <div class="card">
-          <div class="card-body"><h3 class="text-success"> <br/> <p class="font-weight-bold"> <p class="text-center">车载监视器 </p></p> </h3></div>
+      <div class="card" id="card1">
+          <div class="card-body"><h3 class="text-info"><p class="font-weight-bold"> <p class="text-center">车载监视器</p></p></h3></div>
       </div>
 
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div class="col">
-				<div class="container">
-				  <table class="table">
-					<tbody>
-					  <tr class="table-danger">
-						<td>GPS卫星颗数:</td>
-						<td>00颗</td>
-					  </tr>
-					  <tr class="table-success">
-						<td>速度：</td>
-						<td>00.0km/h</td>
-					  </tr>
-					  <tr class="table-info">
-						<td>当前位置:</td>
-						<td>
-              <p>22.1234567</p>
-              <p>114.1234567</p>
-              <p>1000.00m </p>
-            </td>
-					  </tr>
-					</tbody>
-				  </table>
-				</div>
-			</div>
-            <div class="col">
-				<div class="container">
-				  <table class="table">
-					<tbody>
-					  <tr class="table-danger">
-						<td>温度:</td>
-						<td>00℃</td>
-					  </tr>
-					  <tr class="table-success">
-						<td>湿度：</td>
-						<td>00% RH</td>
-					  </tr>
-					  <tr class="table-info">
-						<td>空气质量：</td>
-						<td>
-              <p>00.0ppm </p>
-              <p> 空气良好 </p>
-              <p> -------- </p>
-            </td>
-					  </tr>
-					</tbody>
-				  </table>
-				</div>
-			</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="container">
+      <div class="card" id="card2">
         <div class="row">
-          <div class="col">
-            <div class="font-weight-bold">当前位置 <p id="current_pos">current position</p></div>
+          <div class="col-6 col-sm-6 col-md-6 col-lg-5 col-xl-5">
+            <div class="container">
+    				  <table class="table table-dark table-striped">
+      					<tbody>
+      					  <tr>
+                    <td>
+                      GPS卫星颗数:&nbsp&nbsp 00颗
+                      &nbsp&nbsp&nbsp
+                      速度：&nbsp&nbsp 00.0km/h
+                    </td>
+      					  </tr>
+
+                  <tr>
+                    <td>
+                      温度:&nbsp&nbsp00℃
+                      &nbsp&nbsp
+                      湿度：&nbsp&nbsp&nbsp 00% RH
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      空气质量：&nbsp&nbsp 00.0ppm &nbsp&nbsp 空气良好
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>RGB控制：
+                      <select class="form-control" id="sel1">
+                       <option>开启</option>
+                       <option>关闭</option>
+                       <option>慢闪</option>
+                       <option>快闪</option>
+                      </select>
+                      RGB颜色：
+                      <select class="form-control" id="sel1">
+                       <option>红</option>
+                       <option>绿</option>
+                       <option>蓝</option>
+                       <option>黄</option>
+                       <option>白</option>
+                       <option>蓝</option>
+                       <option>琥珀色</option>
+                      </select>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>蜂鸣器控制:
+                      <select class="form-control" id="sel1">
+                       <option>开启</option>
+                       <option>关闭</option>
+                       <option>快响</option>
+                       <option>慢响</option>
+                      </select>
+                    设备数据发送频率
+                      <select class="form-control" id="sel1">
+                       <option>1HZ</option>
+                       <option>0.1HZ</option>
+                       <option>0.5HZ</option>
+                       <option>默认</option>
+                      </select>
+                    </td>
+                  </tr>
+      					</tbody>
+    				  </table>
+    				</div>
           </div>
-          <div class="col">
-            <div class="font-weight-bold">车辆位置 <p id="car_pos">car position</p></div>
+
+          <div class="col-6 col-sm-6 col-md-6 col-lg-7 col-xl-7">
+            <table class="table">
+              <tbody>
+                <tr class="table-danger">
+                  <td>当前位置:
+                    <p> current position</p>
+                  </td>
+                  <td>车辆位置:
+                    <p>car position</P>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div id="GaoDeMap" ></div>
+            <!-- 加载地图JSAPI脚本 -->
+            <script type="text/javascript">
+                window.init = function(){
+                  var satelliteLayer = new AMap.TileLayer.Satellite();
+                  var map = new AMap.Map('GaoDeMap', {
+                     center:[114.111745,22.65191],
+                     zoom:15
+                  });
+                  map.add(satelliteLayer);
+                }
+            </script>
+            <script src="https://webapi.amap.com/maps?v=1.4.12&key=a15662c3d060a41e3c2afe512edf3ed9&callback=init"></script>
+
           </div>
+
         </div>
-		  <div id="map" class="map" style="{height: 400px; width: 100%;}"></div>
-		  <script type="text/javascript">
-        var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-          source: new ol.source.OSM()
-          })
-        ],
-        view: new ol.View({
-          center: ol.proj.fromLonLat([37.41, 8.82]),
-          zoom: 4
-        })
-      });
-		    </script>
       </div>
-    <div>
-
-    <script>
-
-    function getLocation(){
-      if(navigator.geolocation){ //判断是否有这个对象
-        navigator.geolocation.getCurrentPosition(function(pos){
-          return ("经度："+pos.coords.longitude+ "纬度："+pos.coords.latitude + "高度："+pos.coords.altitude);
-        })
-      }else{ return ("当前系统不支持GPS API"); } }
-
-      $(document).ready(function(){
-        
-      });
-    </script>
+    </div>
 
   </body>
 
